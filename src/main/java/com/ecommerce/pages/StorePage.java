@@ -26,9 +26,14 @@ public class StorePage extends BasePage {
     private By wishlistButton = By.cssSelector(".products.row [data-id-product='1'] [class='wishlist-button-add']");
     private By wishlistModal = By.cssSelector(".show .modal-content");
     private By cancelModalBtn = By.cssSelector(".show .btn-secondary");
+    private By storeProductHeader = By.xpath("//h2[contains(text(), 'Popular Products')]");
 
     public boolean isStoreHeaderDisplayed() {
         return find(storeHeader).isDisplayed();
+    }
+
+    public boolean isStoreProductHeaderDisplayed() {
+        return find(storeProductHeader).isDisplayed();
     }
 
     public StorePage clickOnSignOutBtn() {
@@ -53,6 +58,13 @@ public class StorePage extends BasePage {
         WebElement bannerOne = wait.until(ExpectedConditions
                 .presenceOfElementLocated(defaultStoreBanner));
         Assert.assertTrue(bannerOne.isDisplayed());
+    }
+
+    public void verifyStoreProductHeader() {
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement header = find(storeProductHeader);
+        String headerText = header.getText();
+        Assert.assertEquals(header.getText(), headerText);
     }
 
     public void wishListTest() {
