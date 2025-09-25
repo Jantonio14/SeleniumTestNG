@@ -27,4 +27,9 @@ public class StoreTest extends BaseTest {
         storePage.isStoreHeaderDisplayed();
         storePage.wishListTest();
     }
+
+    @Test
+    public void testRelativeXpath() {
+        storePage.verifyStoreProductHeader();
+    }
 }
