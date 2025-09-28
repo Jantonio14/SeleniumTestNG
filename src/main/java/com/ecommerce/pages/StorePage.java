@@ -1,19 +1,13 @@
 package com.ecommerce.pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 
 public class StorePage extends BasePage {
@@ -38,6 +32,9 @@ public class StorePage extends BasePage {
 
     public StorePage clickOnSignOutBtn() {
         click(signOutBtn);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement signIn = find(signInBtn);
+        wait.until(ExpectedConditions.visibilityOf(signIn));
         return new StorePage();
     }
 

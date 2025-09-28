@@ -11,13 +11,11 @@ public class StoreTest extends BaseTest {
 
     @Test
     public void verifyStoreHeaderIsDisplayed()  {
-        StorePage storePage = loginPage.loginToApp("testing@mail.com", "admin123");
         Assert.assertTrue(storePage.isStoreHeaderDisplayed());
     }
 
     @Test
     public void verifyDefaultBanner() throws InterruptedException {
-        StorePage storePage = loginPage.loginToApp("testing@mail.com", "admin123");
         Thread.sleep(3000);
         storePage.storeBannerTest();
     }

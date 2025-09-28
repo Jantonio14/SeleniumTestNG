@@ -2,6 +2,7 @@ package another.com.ecommerce.base;
 
 import com.ecommerce.pages.BasePage;
 import com.ecommerce.pages.LoginPage;
+import com.ecommerce.pages.SignUpPage;
 import com.ecommerce.pages.StorePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +18,7 @@ public class BaseTest {
     protected BasePage basePage;
     protected LoginPage loginPage;
     protected StorePage storePage;
+    protected SignUpPage signupPage;
     private String url = "https://teststore.automationtesting.co.uk/index.php?controller=authentication?back=https%3A%2F%2Fteststore.automationtesting.co.uk%2Findex.php";
 
     @BeforeClass
@@ -28,7 +30,8 @@ public class BaseTest {
         basePage.setDriver(driver);
         loginPage = new LoginPage();
         storePage = new StorePage();
-        loginPage.loginToApp("testing@mail.com", "admin123");
+        signupPage = new SignUpPage();
+        loginPage.loginToApp("cc.testing.jacil@gmail.com", "!ghfyrh653@#$");
     }
 
     @AfterClass
