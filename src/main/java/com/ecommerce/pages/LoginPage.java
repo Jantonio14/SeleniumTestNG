@@ -1,6 +1,8 @@
 package com.ecommerce.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 
 public class LoginPage extends BasePage {
@@ -9,6 +11,8 @@ public class LoginPage extends BasePage {
     private By passwordInput = By.id("field-password");
     private By submitButton = By.id("submit-login");
     private By errorMessage = By.cssSelector(".alert-danger");
+    private By showPassBtn = By.cssSelector("[data-action=\"show-password\"]");
+    private By signUpLink = By.cssSelector("[data-link-action=\"display-register-form\"]");
 
     public void setUsername(String username) {
         set(usernameInput, username);
@@ -18,10 +22,28 @@ public class LoginPage extends BasePage {
         set(passwordInput, password);
     }
 
+    public void showPassword() {
+        setPassword("Test");
+        find(showPassBtn);
+        click(showPassBtn);
+    }
+
+    public void verifyVisiblePassword() {
+        WebElement element = find(showPassBtn);
+        String actualText = element.getText();
+        Assert.assertEquals(actualText, "HIDE");
+    }
+
     // Transition method
     public StorePage clickLoginButton() {
         click(submitButton);
         return new StorePage();
+    }
+
+    // Transition method
+    public SignUpPage clickSignUpLink() {
+        click(signUpLink);
+        return new SignUpPage();
     }
 
     public String getErrorMessage() {

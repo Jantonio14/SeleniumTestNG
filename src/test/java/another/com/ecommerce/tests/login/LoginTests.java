@@ -7,15 +7,25 @@ import org.testng.annotations.Test;
 public class LoginTests extends BaseTest {
 
     @Test
-    public void testLoginErrorMessage() {
+    public void testLoginErrorMessage() throws InterruptedException {
         storePage.clickOnSignOutBtn();
         storePage.isStoreHeaderDisplayed();
         storePage.clickOnSignInBtn();
         loginPage.setUsername("testing@mail.com");
-        loginPage.setPassword("admin124"); // real pw: admin123
+        loginPage.setPassword("admin1244"); // real pw: admin123
         loginPage.clickLoginButton();
         String actualMessage = loginPage.getErrorMessage();
         Assert.assertTrue(actualMessage.contains("Authentication failed"));
+    }
+
+    @Test
+    public void testShowPassword() {
+        storePage.clickOnSignOutBtn();
+        storePage.isStoreHeaderDisplayed();
+        storePage.clickOnSignInBtn();
+        loginPage.showPassword();
+        loginPage.verifyVisiblePassword();
+
     }
 
     @Test
