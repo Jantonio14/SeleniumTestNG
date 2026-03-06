@@ -11,8 +11,8 @@ public class LoginTests extends BaseTest {
         storePage.clickOnSignOutBtn();
         storePage.isStoreHeaderDisplayed();
         storePage.clickOnSignInBtn();
-        loginPage.setUsername("testing@mail.com");
-        loginPage.setPassword("admin1244"); // real pw: admin123
+        loginPage.setUsername(testUser);
+        loginPage.setPassword(testPass + "Wrong");
         loginPage.clickLoginButton();
         String actualMessage = loginPage.getErrorMessage();
         Assert.assertTrue(actualMessage.contains("Authentication failed"));
@@ -33,8 +33,8 @@ public class LoginTests extends BaseTest {
         storePage.clickOnSignOutBtn();
         storePage.isStoreHeaderDisplayed();
         storePage.clickOnSignInBtn();
-        loginPage.setUsername("testing@mail.com");
-        loginPage.setPassword("admin123"); // real pw: admin123
+        loginPage.setUsername(testUser);
+        loginPage.setPassword(testPass); // real pw: admin123
         loginPage.clickLoginButton();
         storePage.isStoreHeaderDisplayed();
     }
