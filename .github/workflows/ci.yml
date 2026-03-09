@@ -2,7 +2,10 @@ name: Selenium TestNG CI
 
 on:
   push:
-    branches: [ main ]
+    push:
+      branches: [ master ]
+    pull_request:
+      branches: [ master ]
 
 jobs:
   run-tests:
@@ -22,3 +25,17 @@ jobs:
           TEST_USER: ${{ secrets.TEST_USER }}
           TEST_PASS: ${{ secrets.TEST_PASS }}
         run: mvn clean test
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+            name: testng-reports
+            path: target/surefire-reports
+
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+            name: screenshots
+            path: screenshots
