@@ -32,6 +32,8 @@ jobs:
         with:
             name: testng-reports
             path: target/surefire-reports
+                  test-output
+            if-no-files-found: ignore
 
       - name: Upload Screenshots
         if: failure()

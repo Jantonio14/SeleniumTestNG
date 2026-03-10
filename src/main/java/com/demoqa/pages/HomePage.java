@@ -1,8 +1,11 @@
 package com.demoqa.pages;
 
 import com.ecommerce.pages.BasePage;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 
 
 public class HomePage extends BasePage {
@@ -17,7 +20,15 @@ public class HomePage extends BasePage {
 
 
     public void dismissCookieBanner() {
-        click(cookieBanner);
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebElement cookieBtn = wait.until(
+                    ExpectedConditions.elementToBeClickable(cookieBanner)
+            );
+            cookieBtn.click();
+        } catch (TimeoutException | NoSuchElementException | ElementNotInteractableException e) {
+            // banner not present or interactable, continue
+        }
     }
 
 

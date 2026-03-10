@@ -1,6 +1,6 @@
 package com.ecommerce.pages;
 
-import org.junit.Assert;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -21,6 +21,16 @@ public class StorePage extends BasePage {
     private By wishlistModal = By.cssSelector(".show .modal-content");
     private By cancelModalBtn = By.cssSelector(".show .btn-secondary");
     private By storeProductHeader = By.xpath("//h2[contains(text(), 'Popular Products')]");
+
+    public boolean isSignOutButtonDisplayed() {
+        return !driver.findElements(signOutBtn).isEmpty();
+    }
+
+    public void signOutIfLoggedIn() {
+        if (isSignOutButtonDisplayed()) {
+            clickOnSignOutBtn();
+        }
+    }
 
     public boolean isStoreHeaderDisplayed() {
         return find(storeHeader).isDisplayed();
@@ -47,29 +57,29 @@ public class StorePage extends BasePage {
         return find(signInBtn).getText().contains("Sign in");
     }
 
-    public void storeBannerTest() {
+    public boolean isStoreBannerDisplayed() {
         Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofSeconds(1))
                 .ignoring(NoSuchElementException.class);
+
         WebElement bannerOne = wait.until(ExpectedConditions
                 .presenceOfElementLocated(defaultStoreBanner));
-        Assert.assertTrue(bannerOne.isDisplayed());
+        return bannerOne.isDisplayed();
     }
 
-    public void verifyStoreProductHeader() {
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement header = find(storeProductHeader);
-        String headerText = header.getText();
-        Assert.assertEquals(header.getText(), headerText);
+    public String getStoreProductHeaderText() {
+        return find(storeProductHeader).getText();
     }
 
-    public void wishListTest() {
+    public String clickWishlistAndGetModalText() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         click(wishlistButton);
-        WebElement modal = find(wishlistModal);
-        wait.until(ExpectedConditions.visibilityOf(modal));
-        String modalText = modal.getText();
-        Assert.assertEquals(modal.getText(), modalText);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(wishlistModal));
+        return find(wishlistModal).getText();
+    }
+
+    public void closeWishlistModal() {
+        click(cancelModalBtn);
     }
 }
