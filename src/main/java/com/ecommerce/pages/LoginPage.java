@@ -2,7 +2,7 @@ package com.ecommerce.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+
 
 
 public class LoginPage extends BasePage {
@@ -28,10 +28,15 @@ public class LoginPage extends BasePage {
         click(showPassBtn);
     }
 
+    public String getVisiblePasswordButtonText() {
+        WebElement element = find(showPassBtn);
+        return element.getText();
+    }
+
     public void verifyVisiblePassword() {
         WebElement element = find(showPassBtn);
         String actualText = element.getText();
-        Assert.assertEquals(actualText, "HIDE");
+        //Assert.assertEquals(actualText, "HIDE");
     }
 
     // Transition method

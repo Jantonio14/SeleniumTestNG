@@ -8,7 +8,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void testLoginErrorMessage() throws InterruptedException {
-        storePage.clickOnSignOutBtn();
+        storePage.signOutIfLoggedIn();
         storePage.isStoreHeaderDisplayed();
         storePage.clickOnSignInBtn();
         loginPage.setUsername(testUser);
@@ -20,17 +20,19 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void testShowPassword() {
-        storePage.clickOnSignOutBtn();
+        storePage.signOutIfLoggedIn();
         storePage.isStoreHeaderDisplayed();
         storePage.clickOnSignInBtn();
-        loginPage.showPassword();
-        loginPage.verifyVisiblePassword();
 
+        loginPage.showPassword();
+
+        String actualText = loginPage.getVisiblePasswordButtonText();
+        Assert.assertEquals(actualText, "HIDE");
     }
 
     @Test
     public void successfulLogin() {
-        storePage.clickOnSignOutBtn();
+        storePage.signOutIfLoggedIn();
         storePage.isStoreHeaderDisplayed();
         storePage.clickOnSignInBtn();
         loginPage.setUsername(testUser);

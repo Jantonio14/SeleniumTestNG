@@ -15,19 +15,20 @@ public class StoreTest extends BaseTest {
     }
 
     @Test
-    public void verifyDefaultBanner() throws InterruptedException {
-        Thread.sleep(3000);
-        storePage.storeBannerTest();
+    public void verifyDefaultBanner() {
+        Assert.assertTrue(storePage.isStoreBannerDisplayed());
     }
 
     @Test
     public void addProductToWishList() {
-        storePage.isStoreHeaderDisplayed();
-        storePage.wishListTest();
+        Assert.assertTrue(storePage.isStoreProductHeaderDisplayed());
+        String modalText = storePage.clickWishlistAndGetModalText();
+        Assert.assertTrue(modalText.toLowerCase().contains("wishlist"));
     }
 
     @Test
     public void testRelativeXpath() {
-        storePage.verifyStoreProductHeader();
+        String headerText = storePage.getStoreProductHeaderText();
+        Assert.assertEquals(headerText, "POPULAR PRODUCTS");
     }
 }

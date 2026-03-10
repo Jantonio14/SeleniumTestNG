@@ -1,6 +1,7 @@
 package another.com.demoqa.tests.alerts;
 
 import another.com.demoqa.base.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AlertsTest extends BaseTest {
@@ -8,12 +9,14 @@ public class AlertsTest extends BaseTest {
     @Test
     public void triggerAndAcceptAlert() {
         homePage.clickOnPopUpPage();
-        popupAlertPage.acceptAlert();
+        String alertText = popupAlertPage.acceptAlert();
+        Assert.assertTrue(alertText.contains("You have triggered the alert!"));
     }
 
     @Test
-    public void triggerAndClosePopUp() throws InterruptedException {
+    public void triggerAndClosePopUp() {
         homePage.clickOnPopUpPage();
-        popupAlertPage.closePopUp();
+        int windowCount = popupAlertPage.closePopUp();
+        Assert.assertEquals(windowCount, 1);
     }
 }

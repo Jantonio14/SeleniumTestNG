@@ -4,7 +4,7 @@ import com.ecommerce.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,10 @@ public class DropDownPage extends BasePage {
     private By secondRadioBtn = By.cssSelector("[for='demo-priority-normal']");
     private By thirdRadioBtn = By.cssSelector("[for='demo-priority-high']");
 
-    public void selectDropDownItem() {
+    public String selectDropDownItem(String optionLabel) {
         Select select = new Select(find(carsDropDown));
-        String optionLabel = "Jeep";
         select.selectByVisibleText(optionLabel);
-        Assert.assertTrue(select.getFirstSelectedOption().getText().equals(optionLabel));
+        return select.getFirstSelectedOption().getText();
     }
 
     public void iterateRadioButtonsTest() throws InterruptedException {
