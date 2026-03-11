@@ -40,7 +40,7 @@ public class BaseTest {
             options.addArguments("--window-size=1920,1080");
         }
 
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
 
         driver.get(url);
